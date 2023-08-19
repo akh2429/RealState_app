@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BsCurrencyRupee } from 'react-icons/bs';
+import Filter from '../../Components/Filter/Filter';
 
 export default function LandingPage() {
 
@@ -26,6 +27,7 @@ export default function LandingPage() {
     return (
         <div
             className='flex justify-center flex-wrap '>
+            <Filter data={data} />
             {data && data.data.map((val) =>
                 <div
                     className='p-2 m-2 border flex h-max w-max bg-slate-900 rounded-md shadow-xl '
@@ -37,7 +39,7 @@ export default function LandingPage() {
                                 src={val.image_url} />
                         </div>
                         <div
-                            className=' ml-8 w-max flex p-2 bg-orange-500 rounded-e-3xl m-1 justify-center items-center shadow-xl'>
+                            className=' ml-8 w-max flex p-2 bg-orange-500 rounded-e-3xl m-1 justify-center items-center shadow-xl border border-white'>
                             {Math.ceil(val.rent_price)}<BsCurrencyRupee />
                             <p
                                 className='font-thin text-xs shadow-xl text-white'>
@@ -69,7 +71,26 @@ export default function LandingPage() {
                             {val.state}
                         </div>
                         <div
-                            className='flex justify-center items-center m-1 bg-orange-500 shadow-xl  rounded-b-full p-1'>
+                            className='flex p-1 m-1 bg-slate-200 rounded-full justify-around '>
+                            <div
+                                className='flex shadow-md'>
+                                {val.bedrooms}-
+                                <p
+                                    className='text-xs round bg-yellow-400 rounded-e-3xl p-1 border border-black shadow-md '>
+                                    {val.bedrooms > 1 ? "bedrooms" : "bedroom"}
+                                </p>
+                            </div>
+                            <div
+                                className='flex shadow-md'>
+                                {val.bathrooms}-
+                                <p
+                                    className='text-xs round bg-yellow-400 rounded-e-3xl p-1 border border-black shadow-md'>
+                                    {val.bathrooms > 1 ? "bathrooms" : "bathroom"}
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            className='flex justify-center items-center m-1 bg-orange-500 shadow-xl  rounded-b-full p-1 border border-white'>
                             {val.address}
                         </div>
                     </div>

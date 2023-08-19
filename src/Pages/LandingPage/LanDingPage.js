@@ -6,12 +6,16 @@ import Filter from '../../Components/Filter/Filter';
 export default function LandingPage() {
 
     const [data, setData] = useState(null);
+    const [filteredData, setFilteredData] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await axios.get("http://localhost:8080/data");
                 setData(response)
+                if (filteredData === null) {
+                    setFilteredData(response.data)
+                }
             }
             catch (error) {
                 console.log(error);
@@ -21,14 +25,26 @@ export default function LandingPage() {
         fetchData();
     }, []);
 
-    console.log(data)
-
+    function filterSearch(value) {
+        const price = value.price.split("-");
+        const bedRooms = value.bedRooms.split("-");
+        const filteredResults = data && data.data.filter((item) => {
+            const stateMatch = value.state === "" || item.state === value.state;
+            const cityMatch = value.city === "" || item.city === value.city;
+            const propertyMatch = value.propertyType === "" || item.property_type === value.propertyType;
+            const priceMatch = value.price === "" || item.rent_price > Number(price[0]) && item.rent_price < Number(price[1]);
+            const roomMatch = value.bedRooms === "" || item.bedrooms > Number(bedRooms[0]) && item.bedrooms < Number(bedRooms[1]);
+            return stateMatch && cityMatch && propertyMatch && priceMatch && roomMatch
+        });
+        setFilteredData(filteredResults);
+    };
 
     return (
         <div
             className='flex justify-center flex-wrap '>
-            <Filter data={data} />
-            {data && data.data.map((val) =>
+            <Filter data={data} filterSearch={filterSearch} />
+            {filteredData && filteredData.length === 0 ? <div>No Results Found</div> : null}
+            {filteredData && filteredData.map((val) =>
                 <div
                     className='p-2 m-2 border flex h-max w-max bg-slate-900 rounded-md shadow-xl '
                     key={val.id} >

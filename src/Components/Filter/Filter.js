@@ -13,15 +13,15 @@ export default function Filter({ data }) {
             className='flex h-24 bg-slate-400 shadow-md w-full justify-center gap-4 p-2  items-center '>
             <div className='text-3xl p-2 border bg-white rounded-r-full ' ><BsSearch /></div>
             <span>States:</span>
-            <select className='h-10 shadow-md'>
+            <select className='h-10 shadow-md rounded-md'>
                 {states.map((val, ind) => <option key={ind} >{val}</option>)}
             </select>
             <span>Cities:</span>
-            <select className='h-10 shadow-md'>
+            <select className='h-10 shadow-md rounded-md'>
                 {cities.map((val, ind) => <option key={ind} >{val}</option>)}
             </select>
             <span>Price:</span>
-            <select className='h-10 shadow-md' >
+            <select className='h-10 shadow-md rounded-md' >
                 <option>1k-3k</option>
                 <option>3k-5k</option>
                 <option>5k-7k</option>
@@ -29,11 +29,11 @@ export default function Filter({ data }) {
                 <option>Above 10K</option>
             </select>
             <span>Property Type:</span>
-            <select className='capitalize h-10 shadow-md'>
+            <select className='capitalize h-10 shadow-md rounded-md'>
                 {propertyType.map((val, ind) => <option key={ind} >{val}</option>)}
             </select>
             <span>Rooms:</span>
-            <select className='h-10 shadow-md'>
+            <select className='h-10 shadow-md rounded-md'>
                 <option>1-2</option>
                 <option>2-3</option>
                 <option>3-5</option>

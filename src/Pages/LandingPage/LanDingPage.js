@@ -21,11 +21,11 @@ export default function LandingPage() {
                 console.log(error);
             }
         }
-
         fetchData();
     }, []);
 
     function filterSearch(value) {
+        console.log(value);
         const price = value.price.split("-");
         const bedRooms = value.bedRooms.split("-");
         const filteredResults = data && data.data.filter((item) => {
@@ -39,10 +39,13 @@ export default function LandingPage() {
         setFilteredData(filteredResults);
     };
 
+    function clearSearch() {
+        setFilteredData(data.data)
+    }
     return (
         <div
             className='flex justify-center flex-wrap '>
-            <Filter data={data} filterSearch={filterSearch} />
+            <Filter data={data} filterSearch={filterSearch} clearSearchfunctionality={clearSearch} />
             {filteredData && filteredData.length === 0 ? <div>No Results Found</div> : null}
             {filteredData && filteredData.map((val) =>
                 <div

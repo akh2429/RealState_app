@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
-export default function Filter({ data, filterSearch }) {
+export default function Filter({ data, filterSearch, clearSearchfunctionality }) {
 
     const [filterData, setFilterData] = useState({ city: "", state: "", price: "", propertyType: "", bedRooms: "" })
     const states = [...new Set(data?.data.map(val => val.state))];
@@ -17,8 +17,14 @@ export default function Filter({ data, filterSearch }) {
     };
 
     function searchFunctionality() {
-        filterSearch(filterData)
-    }
+        filterSearch(filterData);
+    };
+
+    function clearSearch() {
+        setFilterData({ city: "", state: "", price: "", propertyType: "", bedRooms: "" });
+        clearSearchfunctionality()
+
+    };
 
     return (
         <from
@@ -35,7 +41,7 @@ export default function Filter({ data, filterSearch }) {
                     className='h-10 shadow-md rounded-md'
                     value={filterData.state}
                     onChange={e => handleFilterChange("state", e.target.value)}>
-                    <option>Select state</option>
+                    <option value={""} >Select state</option>
                     {states.map((val, ind) => <option key={ind} >{val}</option>)}
                 </select>
                 <span>
@@ -45,7 +51,7 @@ export default function Filter({ data, filterSearch }) {
                     className='h-10 shadow-md rounded-md'
                     value={filterData.city}
                     onChange={e => handleFilterChange("city", e.target.value)} >
-                    <option>Select city</option>
+                    <option value={""} >Select city</option>
                     {cities.map((val, ind) => <option key={ind} >{val}</option>)}
                 </select>
                 <span>
@@ -55,7 +61,7 @@ export default function Filter({ data, filterSearch }) {
                     className='h-10 shadow-md rounded-md'
                     value={filterData.price}
                     onChange={e => handleFilterChange("price", e.target.value)} >
-                    <option>Select price</option>
+                    <option value={""} >Select price</option>
                     {priceOptions.map((val, ind) => <option key={ind} >{val}</option>)}
                 </select>
                 <span>
@@ -65,7 +71,7 @@ export default function Filter({ data, filterSearch }) {
                     className='capitalize h-10 shadow-md rounded-md'
                     value={filterData.propertyType}
                     onChange={e => handleFilterChange("propertyType", e.target.value)}>
-                    <option>Property type</option>
+                    <option value={""} >Property type</option>
                     {propertyType.map((val, ind) => <option key={ind} >{val}</option>)}
                 </select>
                 <span>
@@ -75,7 +81,7 @@ export default function Filter({ data, filterSearch }) {
                     className='h-10 shadow-md rounded-md'
                     value={filterData.bedRooms}
                     onChange={e => handleFilterChange("bedRooms", e.target.value)}>
-                    <option>Rooms</option>
+                    <option value={""} >Rooms</option>
                     {bedroomOptions.map((val, ind) => <option key={ind} >{val}</option>)}
                 </select>
             </div>
@@ -87,7 +93,8 @@ export default function Filter({ data, filterSearch }) {
                     SEARCH
                 </button>
                 <button
-                    className='p-2 bg-lime-500 border shadow-md  rounded-md' >
+                    className='p-2 bg-lime-500 border shadow-md  rounded-md'
+                    onClick={clearSearch} >
                     CLEAR SEARCH
                 </button>
             </div>

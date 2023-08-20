@@ -27,7 +27,7 @@ export default function Filter({ data, filterSearch, clearSearchfunctionality })
     };
 
     return (
-        <from
+        <div
             className='flex h-36 bg-slate-400 shadow-md w-full justify-center gap-4 p-2  items-center flex-col '>
             <div className='flex gap-2 justify-center items-center'>
                 {/* <div
@@ -98,6 +98,6 @@ export default function Filter({ data, filterSearch, clearSearchfunctionality })
                     CLEAR SEARCH
                 </button>
             </div>
-        </from>
+        </div>
     )
 }

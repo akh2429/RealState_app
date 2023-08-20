@@ -25,15 +25,14 @@ export default function LandingPage() {
     }, []);
 
     function filterSearch(value) {
-        console.log(value);
         const price = value.price.split("-");
         const bedRooms = value.bedRooms.split("-");
         const filteredResults = data && data.data.filter((item) => {
             const stateMatch = value.state === "" || item.state === value.state;
             const cityMatch = value.city === "" || item.city === value.city;
             const propertyMatch = value.propertyType === "" || item.property_type === value.propertyType;
-            const priceMatch = value.price === "" || item.rent_price > Number(price[0]) && item.rent_price < Number(price[1]);
-            const roomMatch = value.bedRooms === "" || item.bedrooms > Number(bedRooms[0]) && item.bedrooms < Number(bedRooms[1]);
+            const priceMatch = value.price === "" || item.rent_price >= Number(price[0]) && item.rent_price <= Number(price[1]);
+            const roomMatch = value.bedRooms === "" || item.bedrooms >= Number(bedRooms[0]) && item.bedrooms <= Number(bedRooms[1]);
             return stateMatch && cityMatch && propertyMatch && priceMatch && roomMatch
         });
         setFilteredData(filteredResults);

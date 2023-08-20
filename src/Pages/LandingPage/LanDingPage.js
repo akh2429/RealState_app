@@ -11,7 +11,7 @@ export default function LandingPage() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get("http://localhost:8080/data");
+                const response = await axios.get("https://realstatebackend.onrender.com/data");
                 setData(response)
                 if (filteredData === null) {
                     setFilteredData(response.data)

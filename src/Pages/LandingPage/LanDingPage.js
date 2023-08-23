@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BsCurrencyRupee } from 'react-icons/bs';
 import Filter from '../../Components/Filter/Filter';
+import a from "./demo.png"
 
 export default function LandingPage() {
 
@@ -59,7 +60,7 @@ export default function LandingPage() {
                         <div>
                             <img
                                 className='top-0 left-0 h-56 w-64 object-cover z-0'
-                                src={val.image_url} />
+                                src={a} />
                         </div>
                         <div
                             className=' ml-8 w-max flex p-2 bg-orange-500 rounded-e-3xl m-1 justify-center items-center shadow-xl border border-white'>

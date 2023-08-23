@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 export default function Filter({ data, filterSearch, clearSearchfunctionality }) {
 
-    const [filterData, setFilterData] = useState({ city: "", state: "", price: "", propertyType: "", bedRooms: "" })
+    const [filterData, setFilterData] = useState({ state: "", price: "", propertyType: "", bedRooms: "" })
     const states = [...new Set(data?.data.map(val => val.state))];
-    const cities = [...new Set(data?.data.map(val => val.city))];
     const propertyType = [...new Set(data?.data.map(val => val.property_type))];
     const priceOptions = ["1000-3000", "3000-5000", "5000-7000", "7000-10000", "10000-12000"];
     const bedroomOptions = ["1-2", "2-3", "3-5", "5-7", "7-10"];
@@ -21,7 +20,7 @@ export default function Filter({ data, filterSearch, clearSearchfunctionality })
     };
 
     function clearSearch() {
-        setFilterData({ city: "", state: "", price: "", propertyType: "", bedRooms: "" });
+        setFilterData({ state: "", price: "", propertyType: "", bedRooms: "" });
         clearSearchfunctionality()
 
     };
@@ -43,16 +42,6 @@ export default function Filter({ data, filterSearch, clearSearchfunctionality })
                     onChange={e => handleFilterChange("state", e.target.value)}>
                     <option value={""} >Select state</option>
                     {states.map((val, ind) => <option key={ind} >{val}</option>)}
-                </select>
-                <span>
-                    Cities:
-                </span>
-                <select
-                    className='h-10 shadow-md rounded-md'
-                    value={filterData.city}
-                    onChange={e => handleFilterChange("city", e.target.value)} >
-                    <option value={""} >Select city</option>
-                    {cities.map((val, ind) => <option key={ind} >{val}</option>)}
                 </select>
                 <span>
                     Price:

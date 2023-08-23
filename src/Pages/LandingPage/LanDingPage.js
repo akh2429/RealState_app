@@ -7,11 +7,13 @@ export default function LandingPage() {
 
     const [data, setData] = useState(null);
     const [filteredData, setFilteredData] = useState(null);
+    const [isloading, setIsloading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await axios.get("https://realstatebackend.onrender.com/data");
+                setIsloading(true)
                 setData(response)
                 if (filteredData === null) {
                     setFilteredData(response.data)
@@ -19,6 +21,9 @@ export default function LandingPage() {
             }
             catch (error) {
                 console.log(error);
+            }
+            finally {
+                setIsloading(false)
             }
         }
         fetchData();
@@ -29,11 +34,10 @@ export default function LandingPage() {
         const bedRooms = value.bedRooms.split("-");
         const filteredResults = data && data.data.filter((item) => {
             const stateMatch = value.state === "" || item.state === value.state;
-            const cityMatch = value.city === "" || item.city === value.city;
             const propertyMatch = value.propertyType === "" || item.property_type === value.propertyType;
             const priceMatch = value.price === "" || item.rent_price >= Number(price[0]) && item.rent_price <= Number(price[1]);
             const roomMatch = value.bedRooms === "" || item.bedrooms >= Number(bedRooms[0]) && item.bedrooms <= Number(bedRooms[1]);
-            return stateMatch && cityMatch && propertyMatch && priceMatch && roomMatch
+            return stateMatch && propertyMatch && priceMatch && roomMatch
         });
         setFilteredData(filteredResults);
     };
@@ -45,6 +49,7 @@ export default function LandingPage() {
         <div
             className='flex justify-center flex-wrap '>
             <Filter data={data} filterSearch={filterSearch} clearSearchfunctionality={clearSearch} />
+            {isloading === true ? <div>LOADING DATA</div> : null}
             {filteredData && filteredData.length === 0 ? <div>No Results Found</div> : null}
             {filteredData && filteredData.map((val) =>
                 <div
